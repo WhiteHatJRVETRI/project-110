@@ -1,4 +1,4 @@
-prediction = "";
+Prediction1 = "";
 
 Webcam.set({
     width: 350,
@@ -30,4 +30,39 @@ function speak() {
     var speak_data = "The Prediction Is "+prediction;
     var utterThis = new SpeechSynthesisUtterance(speak_data);
     synth.speak(utterThis);
+}
+function check(){
+    img=document.getElementById('image_captured')
+    classifier.classify(img,gotresult)
+}
+function gotresult(error,results){
+    if (error) {
+        console.log(error)
+    }else {
+        console.log(results)
+        document.getElementById("result_gesture_name").innerHTML=results[0].label
+        Predition1=results[0].label
+        speak()
+        if (results[0].label=="Best") {
+            document.getElementById("update_emoji").innerHTML="👍"
+        } if (results[0].label=="Victory") {
+            document.getElementById("update_emoji").innerHTML="✌"
+        }
+        if (results[0].label=="Amazing") {
+            document.getElementById("update_emoji").innerHTML="👌"
+        }
+        if (results[0].label=="Unity") {
+            document.getElementById("update_emoji").innerHTML="🤘"
+        }
+        if (results[0].label=="Rock") {
+            document.getElementById("update_emoji").innerHTML="✊"
+        } if (results[0].label=="Clap") {
+            document.getElementById("update_emoji").innerHTML="👏"
+        }
+        if (results[0].label=="Bye") {
+            document.getElementById("update_emoji").innerHTML="👋"
+        }
+       
+
+    }
 }
